@@ -14,15 +14,14 @@
  *
  * 1. El proceso padre comienza creando todos los procesos hijos necesarios y guarda sus PIDs.
  *
- * 2. Una vez que todos los hijos están creados, el padre les envía a cada uno la lista completa
- *    de PIDs. Cada hijo, al recibirla, identifica cuál es su propio PID y así determina quién es
- *    su "siguiente" en el anillo.
+ * 2. Una vez que todos los hijos están creados, el padre les envía a cada uno el PID a ellos. Cada hijo, al recibirla
+ *    guardan en la variable global su "siguiente" en el anillo.
  *
- * 3. Solo uno de los procesos recibe inicialmente el "token" (un número entero). Ese token es
+ * 3. El primer proceso que fue creado recibe inicialmente el "token" (un número entero) entregado por el padre. Ese token es
  *    pasado de un proceso a otro en forma de señales, simulando el movimiento en anillo.
  *
- * 4. Cada vez que un proceso recibe el token, lo reduce en un número aleatorio. Si el token se
- *    vuelve negativo, ese proceso se "elimina" a sí mismo y avisa al padre que ha muerto.
+ * 4. Cada vez que un proceso recibe el token, lo reduce en un número aleatorio. Si un proceso hijo
+ *    genera un token negativo, ese proceso se "elimina" a sí mismo y avisa al padre que ha muerto.
  *
  * 5. El padre, al ser notificado, actualiza la lista de PIDs eliminando al proceso caído, y
  *    a la vez cual es el proceso antes del eliminado, para enviar el nuevo PID del proceso siguiente
@@ -31,7 +30,7 @@
  * 6. Así, el ciclo continúa con cada ronda pasando el Token original por parte del padre al primero de la lista, 
  *    hasta que queda solamente un proceso activo en el anillo. Ese es el "ganador".
  *
- * 7. El proceso padre permanece vivo durante toda la ejecución, monitoreando todo el sistema y
+ * 7. El proceso padre permanece vivo durante toda la ejecución, monitoreando todo el sistema, realizando nuevas conexiones y
  *    finaliza solo cuando el declara un ganador.
  *
  */

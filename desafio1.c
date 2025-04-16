@@ -123,8 +123,8 @@ void padre_maneja_token_negativo(int sig, siginfo_t *info, void *context) {
 // Descripción: Función que muestra el correcto uso de argumentos para poder ejecutar el codigo y despues cierra el programa
 void mostrar_uso() {
     printf("Uso correcto:\n");
-    printf("./desafio1.exe -p <n_procesos> -M <max_decremento> -t <token_inicial>\n");
-    printf("Ejemplo: ./desafio1.exe -p 5 -M 10 -t 50\n");
+    printf("./desafio1 -p <n_procesos> -M <max_decremento> -t <token_inicial>\n");
+    printf("Ejemplo: ./desafio1 -p 5 -M 10 -t 50\n");
     exit(1);
 }
 
